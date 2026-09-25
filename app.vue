@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue'
 import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin, Phone, Share2 } from '@lucide/vue'
+import portfolio from './data/portfolio.json'
 
 let revealObserver: IntersectionObserver | undefined
 
@@ -59,26 +60,9 @@ onBeforeUnmount(() => {
   revealObserver = undefined
 })
 
-const projects = [
-  { title: ['Finance', 'Dashboard'], type: 'UI/UX DESIGN', category: 'WEB APPLICATION', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1100&q=85', accent: 'project-orange' },
-  { title: ['Elevate', 'Your Brand'], type: 'WEBSITE DESIGN', category: 'BRANDING', image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1100&q=85', accent: 'project-blue' },
-  { title: ['Wellness', 'Companion'], type: 'MOBILE APP DESIGN', category: 'HEALTH & LIFESTYLE', image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1100&q=85', accent: 'project-violet' },
-]
-
-const tools = [
-  ['Figma', 'devicon-figma-plain'], ['Photoshop', 'devicon-photoshop-plain'], ['Illustrator', 'devicon-illustrator-plain'],
-  ['Webflow', 'devicon-webflow-original'], ['Framer', 'devicon-framermotion-plain'], ['Spline', 'devicon-threejs-original'],
-  ['After Effects', 'devicon-aftereffects-plain'], ['Notion', 'devicon-notion-plain'], ['HTML/CSS', 'devicon-html5-plain'],
-]
-const process = [
-  ['01', 'DISCOVER', 'Understanding goals, users, and the problem in depth.'],
-  ['02', 'DEFINE', 'Research, analyze, and turn insights into clear direction.'],
-  ['03', 'DESIGN', 'Designing intuitive interfaces with clarity and purpose.'],
-  ['04', 'DEVELOP', 'Collaborating with developers to bring ideas to life.'],
-  ['05', 'DELIVER', 'Testing, refining, and launching seamless experiences.'],
-]
-const introWords = 'Saya merancang pengalaman digital yang elegan dan berperforma tinggi dengan menggabungkan strategi, estetika, dan teknologi.'.split(' ')
-const contactWords = 'I’m currently available for freelance projects and collaborations. Let’s make something meaningful together.'.split(' ')
+const { hero, stats, projects, tools, process, contact } = portfolio
+const introWords = hero.description.split(' ')
+const contactWords = contact.description.split(' ')
 </script>
 
 <template>
@@ -101,7 +85,7 @@ const contactWords = 'I’m currently available for freelance projects and colla
     <main id="top">
       <section id="about" class="hero container-xl px-4 px-lg-0">
         <div class="hero-copy">
-          <h1 class="intro-reveal text-reveal"><span class="text-word">ITSUPPORT</span><br /><i><span class="text-word">SPECIALIST</span></i></h1>
+          <h1 class="intro-reveal text-reveal"><span class="text-word">{{ hero.title[0] }}</span><br /><i><span class="text-word">{{ hero.title[1] }}</span></i></h1>
           <p class="hero-intro intro-reveal text-reveal"><span v-for="word in introWords" :key="word" class="text-word">{{ word }}</span></p>
           <div class="d-flex flex-wrap align-items-center gap-4 mt-4 intro-reveal">
             <a class="btn btn-light btn-arrow" href="#work">VIEW MY WORK <ArrowUpRight :size="14" :stroke-width="1.8" /></a>
@@ -115,10 +99,7 @@ const contactWords = 'I’m currently available for freelance projects and colla
 
       <section class="container-xl px-4 px-lg-0 stats-wrap">
         <div class="stats row g-0">
-          <div class="stat col-6 col-lg-3"><strong>2<span>+</span></strong><small>YEARS EXPERIENCE</small></div>
-          <div class="stat col-6 col-lg-3"><strong>2<span>+</span></strong><small>PROJECTS COMPLETED</small></div>
-          <div class="stat col-6 col-lg-3"><strong>2<span>+</span></strong><small>HAPPY CLIENTS</small></div>
-          <div class="stat col-6 col-lg-3"><strong>1</strong><small>COMPANIES</small></div>
+          <div v-for="stat in stats" :key="stat.label" class="stat col-6 col-lg-3"><strong>{{ stat.value }}<span>{{ stat.suffix }}</span></strong><small>{{ stat.label }}</small></div>
         </div>
       </section>
 
@@ -138,7 +119,7 @@ const contactWords = 'I’m currently available for freelance projects and colla
 
       <section class="section container-xl px-4 px-lg-0 process-section"><div class="process-row"><div v-for="step in process" :key="step[0]" class="process-step reveal"><span>{{ step[0] }}</span><h4>{{ step[1] }}</h4><p>{{ step[2] }}</p></div></div></section>
 
-      <section id="contact" class="contact-section container-xl px-4 px-lg-0"><div><h2 class="reveal text-reveal"><span class="text-word">LET'S</span> <span class="text-word">MAKE</span><br /><em><span class="text-word">something</span></em><br /><span class="text-word">remarkable.</span></h2></div><div class="contact-side reveal"><p class="text-reveal"><span v-for="word in contactWords" :key="word" class="text-word">{{ word }}</span></p><a class="btn btn-light btn-arrow" href="mailto:pdjaww@gmail.com">LET'S WORK TOGETHER <ArrowUpRight :size="14" :stroke-width="1.8" /></a><div class="contact-details"><a href="mailto:pdjaww@gmail.com"><Mail :size="14" /> pdjaww@gmail.com</a><a href="tel:+6285178226971"><Phone :size="14" /> +62 851 7822 6971</a><span><MapPin :size="14" /> Serang, Indonesia</span><a href="#top"><Globe :size="14" /> jawira-dev.yuroflac.my.id</a></div></div></section>
+      <section id="contact" class="contact-section container-xl px-4 px-lg-0"><div><h2 class="reveal text-reveal"><span class="text-word">LET'S</span> <span class="text-word">MAKE</span><br /><em><span class="text-word">something</span></em><br /><span class="text-word">remarkable.</span></h2></div><div class="contact-side reveal"><p class="text-reveal"><span v-for="word in contactWords" :key="word" class="text-word">{{ word }}</span></p><a class="btn btn-light btn-arrow" :href="`mailto:${contact.email}`">LET'S WORK TOGETHER <ArrowUpRight :size="14" :stroke-width="1.8" /></a><div class="contact-details"><a :href="`mailto:${contact.email}`"><Mail :size="14" /> {{ contact.email }}</a><a :href="`tel:${contact.phone.replace(/\s/g, '')}`"><Phone :size="14" /> {{ contact.phone }}</a><span><MapPin :size="14" /> {{ contact.location }}</span><a href="#top"><Globe :size="14" /> {{ contact.website }}</a></div></div></section>
     </main>
 
     <footer class="container-xl px-4 px-lg-0 footer"><span>© 2026 AV STUDIO. ALL RIGHTS RESERVED.</span><span>LET'S CONNECT &nbsp; <a href="#" aria-label="Social profile"><Share2 :size="14" /></a> &nbsp; <a href="#" aria-label="Website"><Globe :size="14" /></a></span></footer>
