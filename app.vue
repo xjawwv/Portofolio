@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue'
+import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin, Phone, Share2 } from '@lucide/vue'
 
 let revealObserver: IntersectionObserver | undefined
 
@@ -91,7 +92,7 @@ const contactWords = 'I’m currently available for freelance projects and colla
         <div id="mainNav" class="collapse navbar-collapse justify-content-end">
           <div class="nav-links align-items-lg-center">
             <a href="#work">WORK</a><a href="#tools">TOOLS</a><a href="#about">ABOUT</a><a href="#contact">CONTACT</a>
-            <a class="btn btn-light nav-button" href="#contact">LET'S TALK <span>↗</span></a>
+            <a class="btn btn-light nav-button" href="#contact">LET'S TALK <ArrowUpRight :size="14" :stroke-width="1.8" /></a>
           </div>
         </div>
       </div>
@@ -100,10 +101,10 @@ const contactWords = 'I’m currently available for freelance projects and colla
     <main id="top">
       <section id="about" class="hero container-xl px-4 px-lg-0">
         <div class="hero-copy">
-          <h1 class="intro-reveal text-reveal"><span class="text-word">DIGITAL</span><br /><i><span class="text-word">DESIGNER</span></i></h1>
+          <h1 class="intro-reveal text-reveal"><span class="text-word">ITSUPPORT</span><br /><i><span class="text-word">SPECIALIST</span></i></h1>
           <p class="hero-intro intro-reveal text-reveal"><span v-for="word in introWords" :key="word" class="text-word">{{ word }}</span></p>
           <div class="d-flex flex-wrap align-items-center gap-4 mt-4 intro-reveal">
-            <a class="btn btn-light btn-arrow" href="#work">VIEW MY WORK <span>↗</span></a>
+            <a class="btn btn-light btn-arrow" href="#work">VIEW MY WORK <ArrowUpRight :size="14" :stroke-width="1.8" /></a>
           </div>
         </div>
         <div class="hero-art">
@@ -114,19 +115,19 @@ const contactWords = 'I’m currently available for freelance projects and colla
 
       <section class="container-xl px-4 px-lg-0 stats-wrap">
         <div class="stats row g-0">
-          <div class="stat col-6 col-lg-3"><strong>6<span>+</span></strong><small>YEARS EXPERIENCE</small></div>
-          <div class="stat col-6 col-lg-3"><strong>40<span>+</span></strong><small>PROJECTS COMPLETED</small></div>
-          <div class="stat col-6 col-lg-3"><strong>18<span>+</span></strong><small>HAPPY CLIENTS</small></div>
-          <div class="stat col-6 col-lg-3"><strong>12</strong><small>COUNTRIES WORKED WITH</small></div>
+          <div class="stat col-6 col-lg-3"><strong>2<span>+</span></strong><small>YEARS EXPERIENCE</small></div>
+          <div class="stat col-6 col-lg-3"><strong>2<span>+</span></strong><small>PROJECTS COMPLETED</small></div>
+          <div class="stat col-6 col-lg-3"><strong>2<span>+</span></strong><small>HAPPY CLIENTS</small></div>
+          <div class="stat col-6 col-lg-3"><strong>1</strong><small>COMPANIES</small></div>
         </div>
       </section>
 
       <section id="work" class="section container-xl px-4 px-lg-0">
-        <div class="section-heading"><div><h2 class="reveal text-reveal"><span class="text-word">Work</span> <span class="text-word">that</span> <span class="text-word">makes</span><br /><em><span class="text-word">an</span> <span class="text-word">impact.</span></em></h2></div><a class="text-link d-none d-md-block reveal text-reveal" href="#contact"><span class="text-word">EXPLORE</span> <span class="text-word">ALL</span> <span class="text-word">PROJECTS</span> <span>→</span></a></div>
+        <div class="section-heading"><div><h2 class="reveal text-reveal"><span class="text-word">Work</span> <span class="text-word">that</span> <span class="text-word">makes</span><br /><em><span class="text-word">an</span> <span class="text-word">impact.</span></em></h2></div><a class="text-link d-none d-md-block reveal text-reveal" href="#contact"><span class="text-word">EXPLORE</span> <span class="text-word">ALL</span> <span class="text-word">PROJECTS</span> <ArrowRight :size="14" :stroke-width="1.8" /></a></div>
         <div class="row g-4 project-grid">
           <article v-for="(project, index) in projects" :key="project.title[0]" class="col-md-6" :class="{ 'featured-project': index === 0 }">
             <a class="project-card" :class="[project.accent, 'reveal']" :style="{ backgroundImage: `url(${project.image})` }" href="#contact">
-              <div class="project-overlay"></div><div class="project-meta"><p>{{ project.type }}<br />{{ project.category }}</p><span class="circle-arrow">↗</span></div>
+               <div class="project-overlay"></div><div class="project-meta"><p>{{ project.type }}<br />{{ project.category }}</p><span class="circle-arrow"><ArrowUpRight :size="20" :stroke-width="1.5" /></span></div>
               <h3>{{ project.title[0] }}<br /><em>{{ project.title[1] }}</em></h3>
             </a>
           </article>
@@ -137,9 +138,9 @@ const contactWords = 'I’m currently available for freelance projects and colla
 
       <section class="section container-xl px-4 px-lg-0 process-section"><div class="process-row"><div v-for="step in process" :key="step[0]" class="process-step reveal"><span>{{ step[0] }}</span><h4>{{ step[1] }}</h4><p>{{ step[2] }}</p></div></div></section>
 
-      <section id="contact" class="contact-section container-xl px-4 px-lg-0"><div><h2 class="reveal text-reveal"><span class="text-word">LET'S</span> <span class="text-word">MAKE</span><br /><em><span class="text-word">something</span></em><br /><span class="text-word">remarkable.</span></h2></div><div class="contact-side reveal"><p class="text-reveal"><span v-for="word in contactWords" :key="word" class="text-word">{{ word }}</span></p><a class="btn btn-light btn-arrow" href="mailto:hello@example.com">LET'S WORK TOGETHER <span>↗</span></a><div class="contact-details"><a href="mailto:hello@example.com">✉ hello@example.com</a><a href="tel:+6281234567890">⌕ +62 812 3456 7890</a><span>⌖ Bandung, Indonesia</span><a href="#top">◎ yourname.com</a></div></div></section>
+      <section id="contact" class="contact-section container-xl px-4 px-lg-0"><div><h2 class="reveal text-reveal"><span class="text-word">LET'S</span> <span class="text-word">MAKE</span><br /><em><span class="text-word">something</span></em><br /><span class="text-word">remarkable.</span></h2></div><div class="contact-side reveal"><p class="text-reveal"><span v-for="word in contactWords" :key="word" class="text-word">{{ word }}</span></p><a class="btn btn-light btn-arrow" href="mailto:pdjaww@gmail.com">LET'S WORK TOGETHER <ArrowUpRight :size="14" :stroke-width="1.8" /></a><div class="contact-details"><a href="mailto:pdjaww@gmail.com"><Mail :size="14" /> pdjaww@gmail.com</a><a href="tel:+6285178226971"><Phone :size="14" /> +62 851 7822 6971</a><span><MapPin :size="14" /> Serang, Indonesia</span><a href="#top"><Globe :size="14" /> jawira-dev.yuroflac.my.id</a></div></div></section>
     </main>
 
-    <footer class="container-xl px-4 px-lg-0 footer"><span>© 2026 AV STUDIO. ALL RIGHTS RESERVED.</span><span>LET'S CONNECT &nbsp; <a href="#">in</a> &nbsp; <a href="#">Be</a> &nbsp; <a href="#">◎</a></span></footer>
+    <footer class="container-xl px-4 px-lg-0 footer"><span>© 2026 AV STUDIO. ALL RIGHTS RESERVED.</span><span>LET'S CONNECT &nbsp; <a href="#" aria-label="Social profile"><Share2 :size="14" /></a> &nbsp; <a href="#" aria-label="Website"><Globe :size="14" /></a></span></footer>
   </div>
 </template>
