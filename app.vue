@@ -109,7 +109,6 @@ const contactWords = 'I’m currently available for freelance projects and colla
         <div class="hero-art">
           <div class="portrait intro-image"></div>
           <div class="orb orb-one"></div><div class="orb orb-two"></div>
-          <span class="vertical-note">SELECTED WORKS / 2020—2026</span>
         </div>
       </section>
 
