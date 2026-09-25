@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue'
 
+let removeRevealListener: (() => void) | undefined
+
 const scrollToAnchor = (event: Event) => {
   const link = event.currentTarget as HTMLAnchorElement
   const hash = link.hash
@@ -34,23 +36,25 @@ onMounted(() => {
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => link.addEventListener('click', scrollToAnchor))
 
   const revealItems = document.querySelectorAll<HTMLElement>('.reveal')
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-        observer.unobserve(entry.target)
-      }
+  const revealOnScroll = () => {
+    const triggerLine = window.innerHeight * 0.82
+    revealItems.forEach((item) => {
+      if (item.getBoundingClientRect().top < triggerLine) item.classList.add('is-visible')
     })
-  }, { threshold: 0.24, rootMargin: '0px 0px -8% 0px' })
+  }
 
-  revealItems.forEach((item) => observer.observe(item))
+  revealOnScroll()
+  window.addEventListener('scroll', revealOnScroll, { passive: true })
+  removeRevealListener = () => window.removeEventListener('scroll', revealOnScroll)
   requestAnimationFrame(() => {
     requestAnimationFrame(() => document.documentElement.classList.add('page-ready'))
   })
+
 })
 
 onBeforeUnmount(() => {
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => link.removeEventListener('click', scrollToAnchor))
+  removeRevealListener?.()
 })
 
 const projects = [
