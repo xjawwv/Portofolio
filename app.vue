@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleEducationKeydown)
 })
 
-const { hero, stats, projects, tools, process, contact } = portfolio
+const { hero, stats, projects, tools, process: processSteps, contact } = portfolio
 const education = portfolio.education
 const introWords = hero.description.split(' ')
 const contactWords = contact.description.split(' ')
@@ -139,7 +139,7 @@ const handleEducationKeydown = (event: KeyboardEvent) => {
 
       <section id="tools" class="section container-xl px-4 px-lg-0 tools-section"><div class="row g-5"><div class="col-lg-5"><h2 class="reveal text-reveal"><span class="text-word">Tools</span> <span class="text-word">of</span><br /><em><span class="text-word">the</span> <span class="text-word">trade.</span></em></h2></div><div class="col-lg-7"><div class="tool-cloud reveal"><span v-for="tool in tools" :key="tool[0]" class="tool-chip"><i :class="tool[1]" aria-hidden="true"></i>{{ tool[0] }}</span></div><div class="education"><p class="section-label">EDUCATION & CERTIFICATION</p><div v-for="item in education" :key="item.title" class="edu-line reveal text-reveal"><strong>{{ item.title }}</strong><span>{{ item.meta }}</span><button class="certificate-button" type="button" @click="openEducationPreview(item)">VIEW CERTIFICATE <ArrowUpRight :size="13" /></button></div></div></div></div></section>
 
-      <section class="section container-xl px-4 px-lg-0 process-section"><div class="process-row"><div v-for="step in process" :key="step[0]" class="process-step reveal"><span>{{ step[0] }}</span><h4>{{ step[1] }}</h4><p>{{ step[2] }}</p></div></div></section>
+      <section class="section container-xl px-4 px-lg-0 process-section"><div class="process-row"><div v-for="step in processSteps" :key="step[0]" class="process-step reveal"><span>{{ step[0] }}</span><h4>{{ step[1] }}</h4><p>{{ step[2] }}</p></div></div></section>
 
       <section id="contact" class="contact-section container-xl px-4 px-lg-0"><div><h2 class="reveal text-reveal"><span class="text-word">LET'S</span> <span class="text-word">MAKE</span><br /><em><span class="text-word">something</span></em><br /><span class="text-word">remarkable.</span></h2></div><div class="contact-side reveal"><p class="text-reveal"><span v-for="word in contactWords" :key="word" class="text-word">{{ word }}</span></p><a class="btn btn-light btn-arrow" :href="`mailto:${contact.email}`">LET'S WORK TOGETHER <ArrowUpRight :size="14" :stroke-width="1.8" /></a><div class="contact-details"><a :href="`mailto:${contact.email}`"><Mail :size="14" /> {{ contact.email }}</a><a :href="`tel:${contact.phone.replace(/\s/g, '')}`"><Phone :size="14" /> {{ contact.phone }}</a><span><MapPin :size="14" /> {{ contact.location }}</span><a :href="contact.github" target="_blank" rel="noreferrer"><CodeXml :size="14" /> GitHub</a><a href="#top"><Globe :size="14" /> {{ contact.website }}</a></div></div></section>
     </main>
