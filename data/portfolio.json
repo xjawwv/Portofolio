@@ -19,6 +19,10 @@
     ["Webflow", "devicon-webflow-original"], ["Framer", "devicon-framermotion-plain"], ["Spline", "devicon-threejs-original"],
     ["After Effects", "devicon-aftereffects-plain"], ["Notion", "devicon-notion-plain"], ["HTML/CSS", "devicon-html5-plain"]
   ],
+  "education": [
+    { "title": "Google UX Design", "meta": "Professional Certificate / 2024", "image": "https://cdn.yuroflac.my.id/portofolio/google-ux-certificate.png" },
+    { "title": "Bachelor of Design", "meta": "Institut Teknologi Bandung / 2018", "image": "https://cdn.yuroflac.my.id/portofolio/bachelor-design-certificate.png" }
+  ],
   "process": [
     ["01", "DISCOVER", "Understanding goals, users, and the problem in depth."],
     ["02", "DEFINE", "Research, analyze, and turn insights into clear direction."],

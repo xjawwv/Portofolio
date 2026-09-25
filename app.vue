@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin, Phone, Share2 } from '@lucide/vue'
 import portfolio from './data/portfolio.json'
 
@@ -51,18 +51,29 @@ onMounted(() => {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => document.documentElement.classList.add('page-ready'))
   })
-
+  window.addEventListener('keydown', handleEducationKeydown)
 })
 
 onBeforeUnmount(() => {
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => link.removeEventListener('click', scrollToAnchor))
   revealObserver?.disconnect()
   revealObserver = undefined
+  window.removeEventListener('keydown', handleEducationKeydown)
 })
 
 const { hero, stats, projects, tools, process, contact } = portfolio
+const education = portfolio.education
 const introWords = hero.description.split(' ')
 const contactWords = contact.description.split(' ')
+const selectedEducation = ref<{ title: string; meta: string; image: string } | null>(null)
+
+const closeEducationPreview = () => {
+  selectedEducation.value = null
+}
+
+const handleEducationKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Escape') closeEducationPreview()
+}
 </script>
 
 <template>
@@ -115,7 +126,7 @@ const contactWords = contact.description.split(' ')
         </div>
       </section>
 
-      <section id="tools" class="section container-xl px-4 px-lg-0 tools-section"><div class="row g-5"><div class="col-lg-5"><h2 class="reveal text-reveal"><span class="text-word">Tools</span> <span class="text-word">of</span><br /><em><span class="text-word">the</span> <span class="text-word">trade.</span></em></h2></div><div class="col-lg-7"><div class="tool-cloud reveal"><span v-for="tool in tools" :key="tool[0]" class="tool-chip"><i :class="tool[1]" aria-hidden="true"></i>{{ tool[0] }}</span></div><div class="education"><p class="section-label">EDUCATION & CERTIFICATION</p><div class="edu-line reveal text-reveal"><strong><span class="text-word">Google</span> <span class="text-word">UX</span> <span class="text-word">Design</span></strong><span><span class="text-word">Professional</span> <span class="text-word">Certificate</span> / 2024</span></div><div class="edu-line reveal text-reveal"><strong><span class="text-word">Bachelor</span> <span class="text-word">of</span> <span class="text-word">Design</span></strong><span><span class="text-word">Institut</span> <span class="text-word">Teknologi</span> <span class="text-word">Bandung</span> / 2018</span></div></div></div></div></section>
+      <section id="tools" class="section container-xl px-4 px-lg-0 tools-section"><div class="row g-5"><div class="col-lg-5"><h2 class="reveal text-reveal"><span class="text-word">Tools</span> <span class="text-word">of</span><br /><em><span class="text-word">the</span> <span class="text-word">trade.</span></em></h2></div><div class="col-lg-7"><div class="tool-cloud reveal"><span v-for="tool in tools" :key="tool[0]" class="tool-chip"><i :class="tool[1]" aria-hidden="true"></i>{{ tool[0] }}</span></div><div class="education"><p class="section-label">EDUCATION & CERTIFICATION</p><div v-for="item in education" :key="item.title" class="edu-line reveal text-reveal"><strong>{{ item.title }}</strong><span>{{ item.meta }}</span><button class="certificate-button" type="button" @click="selectedEducation = item">VIEW CERTIFICATE <ArrowUpRight :size="13" /></button></div></div></div></div></section>
 
       <section class="section container-xl px-4 px-lg-0 process-section"><div class="process-row"><div v-for="step in process" :key="step[0]" class="process-step reveal"><span>{{ step[0] }}</span><h4>{{ step[1] }}</h4><p>{{ step[2] }}</p></div></div></section>
 
@@ -123,5 +134,14 @@ const contactWords = contact.description.split(' ')
     </main>
 
     <footer class="container-xl px-4 px-lg-0 footer"><span>© 2026 AV STUDIO. ALL RIGHTS RESERVED.</span><span>LET'S CONNECT &nbsp; <a href="#" aria-label="Social profile"><Share2 :size="14" /></a> &nbsp; <a href="#" aria-label="Website"><Globe :size="14" /></a></span></footer>
+
+    <div v-if="selectedEducation" class="certificate-modal" role="dialog" aria-modal="true" :aria-label="selectedEducation.title" @click.self="closeEducationPreview">
+      <div class="certificate-dialog">
+        <button class="certificate-close" type="button" aria-label="Close certificate preview" @click="closeEducationPreview">×</button>
+        <p class="section-label">{{ selectedEducation.title }}</p>
+        <img :src="selectedEducation.image" :alt="`${selectedEducation.title} certificate`" />
+        <small>{{ selectedEducation.meta }}</small>
+      </div>
+    </div>
   </div>
 </template>
