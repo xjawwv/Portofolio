@@ -10,18 +10,16 @@
     { "value": "1", "suffix": "", "label": "COMPANIES" }
   ],
   "projects": [
-    { "title": ["Finance", "Dashboard"], "type": "UI/UX DESIGN", "category": "WEB APPLICATION", "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1100&q=85", "accent": "project-orange" },
-    { "title": ["Elevate", "Your Brand"], "type": "WEBSITE DESIGN", "category": "BRANDING", "image": "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1100&q=85", "accent": "project-blue" },
-    { "title": ["Wellness", "Companion"], "type": "MOBILE APP DESIGN", "category": "HEALTH & LIFESTYLE", "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1100&q=85", "accent": "project-violet" }
+    { "title": ["Send Picture", "SnapFun Studio"], "type": "CLOUD DRIVE", "category": "WEB APPLICATION", "image": "https://cdn.yuroflac.my.id/portofolio/project/sendsnapfun.png", "accent": "project-orange" }
   ],
   "tools": [
-    ["Figma", "devicon-figma-plain"], ["Photoshop", "devicon-photoshop-plain"], ["Illustrator", "devicon-illustrator-plain"],
-    ["Webflow", "devicon-webflow-original"], ["Framer", "devicon-framermotion-plain"], ["Spline", "devicon-threejs-original"],
-    ["After Effects", "devicon-aftereffects-plain"], ["Notion", "devicon-notion-plain"], ["HTML/CSS", "devicon-html5-plain"]
+    ["Figma", "devicon-figma-plain colored"], ["Javascript", "devicon-javascript-plain colored"], ["Golang", "devicon-go-plain colored"],
+    ["Vue.Js", "devicon-vuejs-plain colored"], ["Nuxt", "devicon-nuxt-original colored"], ["Express", "devicon-express-original"],
+    ["PostgreSQL","devicon-postgresql-plain colored"], ["MySQL", "devicon-mysql-original colored"]
   ],
   "education": [
-    { "title": "Google UX Design", "meta": "Professional Certificate / 2024", "image": "https://cdn.yuroflac.my.id/portofolio/google-ux-certificate.png" },
-    { "title": "Bachelor of Design", "meta": "Institut Teknologi Bandung / 2018", "image": "https://cdn.yuroflac.my.id/portofolio/bachelor-design-certificate.png" }
+    { "title": "Google UX Design", "meta": "Professional Certificate / 2024", "type": "pdf", "image": "https://cdn.yuroflac.my.id/portofolio/education-certification/sertifikat_course_123_5529311_010926141130.pdf" },
+    { "title": "Rekayasa Perangkat Lunak", "meta": "SMK Negeri 1 Kragilan / Present", "image": "https://cdn.yuroflac.my.id/portofolio/bachelor-design-certificate.png" }
   ],
   "process": [
     ["01", "DISCOVER", "Understanding goals, users, and the problem in depth."],

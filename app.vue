@@ -126,7 +126,7 @@ const handleEducationKeydown = (event: KeyboardEvent) => {
       </section>
 
       <section id="work" class="section container-xl px-4 px-lg-0">
-        <div class="section-heading"><div><h2 class="reveal text-reveal"><span class="text-word">Work</span> <span class="text-word">that</span> <span class="text-word">makes</span><br /><em><span class="text-word">an</span> <span class="text-word">impact.</span></em></h2></div><a class="text-link d-none d-md-block reveal text-reveal" href="#contact"><span class="text-word">EXPLORE</span> <span class="text-word">ALL</span> <span class="text-word">PROJECTS</span> <ArrowRight :size="14" :stroke-width="1.8" /></a></div>
+        <div class="section-heading"><div><h2 class="reveal text-reveal"><span class="text-word">A</span> <span class="text-word">cool</span> <span class="text-word">job</span><br /><em><span class="text-word">an</span> <span class="text-word">impact.</span></em></h2></div><a class="text-link d-none d-md-block reveal text-reveal" href="#contact"><span class="text-word">EXPLORE</span> <span class="text-word">ALL</span> <span class="text-word">PROJECTS</span> <ArrowRight :size="14" :stroke-width="1.8" /></a></div>
         <div class="row g-4 project-grid">
           <article v-for="(project, index) in projects" :key="project.title[0]" class="col-md-6" :class="{ 'featured-project': index === 0 }">
             <a class="project-card" :class="[project.accent, 'reveal']" :style="{ backgroundImage: `url(${project.image})` }" href="#contact">
@@ -149,8 +149,9 @@ const handleEducationKeydown = (event: KeyboardEvent) => {
     <div v-if="selectedEducation" class="certificate-modal" role="dialog" aria-modal="true" :aria-label="selectedEducation.title" @click.self="closeEducationPreview">
       <div class="certificate-dialog">
         <button class="certificate-close" type="button" aria-label="Close certificate preview" @click="closeEducationPreview">×</button>
-        <div class="certificate-toolbar"><p class="section-label">{{ selectedEducation.title }}</p><div><button type="button" aria-label="Zoom out" @click="changeCertificateZoom(-0.25)">−</button><span>{{ Math.round(certificateZoom * 100) }}%</span><button type="button" aria-label="Zoom in" @click="changeCertificateZoom(0.25)">+</button><button type="button" aria-label="Reset zoom" @click="certificateZoom = 1">RESET</button></div></div>
-        <div class="certificate-image-wrap"><img :src="selectedEducation.image" :alt="`${selectedEducation.title} certificate`" :style="{ transform: `scale(${certificateZoom})` }" @click="certificateZoom = certificateZoom === 1 ? 2 : 1" /></div>
+        <div class="certificate-toolbar"><p class="section-label">{{ selectedEducation.title }}</p><div v-if="selectedEducation.type !== 'pdf'"><button type="button" aria-label="Zoom out" @click="changeCertificateZoom(-0.25)">−</button><span>{{ Math.round(certificateZoom * 100) }}%</span><button type="button" aria-label="Zoom in" @click="changeCertificateZoom(0.25)">+</button><button type="button" aria-label="Reset zoom" @click="certificateZoom = 1">RESET</button></div></div>
+        <div v-if="selectedEducation.type === 'pdf'" class="certificate-pdf-wrap"><iframe :src="`${selectedEducation.image}#view=FitH`" :title="`${selectedEducation.title} PDF`"></iframe></div>
+        <div v-else class="certificate-image-wrap"><img :src="selectedEducation.image" :alt="`${selectedEducation.title} certificate`" :style="{ transform: `scale(${certificateZoom})` }" @click="certificateZoom = certificateZoom === 1 ? 2 : 1" /></div>
         <small>{{ selectedEducation.meta }}</small>
       </div>
     </div>
