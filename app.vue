@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue'
-import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin, Phone, Share2 } from '@lucide/vue'
+import { ArrowRight, ArrowUpRight, CodeXml, Globe, Mail, MapPin, Phone, Share2 } from '@lucide/vue'
 import portfolio from './data/portfolio.json'
 
 let revealObserver: IntersectionObserver | undefined
@@ -141,7 +141,7 @@ const handleEducationKeydown = (event: KeyboardEvent) => {
 
       <section class="section container-xl px-4 px-lg-0 process-section"><div class="process-row"><div v-for="step in process" :key="step[0]" class="process-step reveal"><span>{{ step[0] }}</span><h4>{{ step[1] }}</h4><p>{{ step[2] }}</p></div></div></section>
 
-      <section id="contact" class="contact-section container-xl px-4 px-lg-0"><div><h2 class="reveal text-reveal"><span class="text-word">LET'S</span> <span class="text-word">MAKE</span><br /><em><span class="text-word">something</span></em><br /><span class="text-word">remarkable.</span></h2></div><div class="contact-side reveal"><p class="text-reveal"><span v-for="word in contactWords" :key="word" class="text-word">{{ word }}</span></p><a class="btn btn-light btn-arrow" :href="`mailto:${contact.email}`">LET'S WORK TOGETHER <ArrowUpRight :size="14" :stroke-width="1.8" /></a><div class="contact-details"><a :href="`mailto:${contact.email}`"><Mail :size="14" /> {{ contact.email }}</a><a :href="`tel:${contact.phone.replace(/\s/g, '')}`"><Phone :size="14" /> {{ contact.phone }}</a><span><MapPin :size="14" /> {{ contact.location }}</span><a href="#top"><Globe :size="14" /> {{ contact.website }}</a></div></div></section>
+      <section id="contact" class="contact-section container-xl px-4 px-lg-0"><div><h2 class="reveal text-reveal"><span class="text-word">LET'S</span> <span class="text-word">MAKE</span><br /><em><span class="text-word">something</span></em><br /><span class="text-word">remarkable.</span></h2></div><div class="contact-side reveal"><p class="text-reveal"><span v-for="word in contactWords" :key="word" class="text-word">{{ word }}</span></p><a class="btn btn-light btn-arrow" :href="`mailto:${contact.email}`">LET'S WORK TOGETHER <ArrowUpRight :size="14" :stroke-width="1.8" /></a><div class="contact-details"><a :href="`mailto:${contact.email}`"><Mail :size="14" /> {{ contact.email }}</a><a :href="`tel:${contact.phone.replace(/\s/g, '')}`"><Phone :size="14" /> {{ contact.phone }}</a><span><MapPin :size="14" /> {{ contact.location }}</span><a :href="contact.github" target="_blank" rel="noreferrer"><CodeXml :size="14" /> GitHub</a><a href="#top"><Globe :size="14" /> {{ contact.website }}</a></div></div></section>
     </main>
 
     <footer class="container-xl px-4 px-lg-0 footer"><span>© 2026 AV STUDIO. ALL RIGHTS RESERVED.</span><span>LET'S CONNECT &nbsp; <a href="#" aria-label="Social profile"><Share2 :size="14" /></a> &nbsp; <a href="#" aria-label="Website"><Globe :size="14" /></a></span></footer>

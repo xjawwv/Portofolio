@@ -18,7 +18,7 @@
     ["PostgreSQL","devicon-postgresql-plain colored"], ["MySQL", "devicon-mysql-original colored"]
   ],
   "education": [
-    { "title": "Google UX Design", "meta": "Professional Certificate / 2024", "type": "pdf", "image": "https://cdn.yuroflac.my.id/portofolio/education-certification/sertifikat_course_123_5529311_010926141130.pdf" },
+    { "title": "Belajar Dasar Pemrograman Web", "meta": "Dicoding / 2026", "type": "pdf", "image": "https://cdn.yuroflac.my.id/portofolio/education-certification/sertifikat_course_123_5529311_010926141130.pdf" },
     { "title": "Rekayasa Perangkat Lunak", "meta": "SMK Negeri 1 Kragilan / Present", "image": "https://cdn.yuroflac.my.id/portofolio/bachelor-design-certificate.png" }
   ],
   "process": [
@@ -33,6 +33,7 @@
     "phone": "+62 851 7822 6971",
     "location": "Serang, Indonesia",
     "website": "jawira-dev.yuroflac.my.id",
+    "github": "https://github.com/yourusername",
     "description": "I’m currently available for freelance projects and collaborations. Let’s make something meaningful together."
   }
 }
