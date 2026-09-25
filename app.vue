@@ -35,17 +35,27 @@ const scrollToAnchor = (event: Event) => {
 onMounted(() => {
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => link.addEventListener('click', scrollToAnchor))
 
-  const revealItems = document.querySelectorAll<HTMLElement>('.reveal')
+  const revealItems = [...document.querySelectorAll<HTMLElement>('.reveal')]
+  let frame = 0
   const revealOnScroll = () => {
-    const triggerLine = window.innerHeight * 0.82
-    revealItems.forEach((item) => {
-      if (item.getBoundingClientRect().top < triggerLine) item.classList.add('is-visible')
+    cancelAnimationFrame(frame)
+    frame = requestAnimationFrame(() => {
+      const triggerLine = window.innerHeight * 0.86
+      revealItems.forEach((item) => {
+        if (item.classList.contains('is-visible')) return
+        if (item.getBoundingClientRect().top <= triggerLine) item.classList.add('is-visible')
+      })
     })
   }
 
-  revealOnScroll()
   window.addEventListener('scroll', revealOnScroll, { passive: true })
-  removeRevealListener = () => window.removeEventListener('scroll', revealOnScroll)
+  window.addEventListener('resize', revealOnScroll, { passive: true })
+  revealOnScroll()
+  removeRevealListener = () => {
+    cancelAnimationFrame(frame)
+    window.removeEventListener('scroll', revealOnScroll)
+    window.removeEventListener('resize', revealOnScroll)
+  }
   requestAnimationFrame(() => {
     requestAnimationFrame(() => document.documentElement.classList.add('page-ready'))
   })
