@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleEducationKeydown)
 })
 
-const { hero, stats, projects, tools, process: processSteps, contact } = portfolio
+const { hero, stats, projects, tools, processSteps, contact } = portfolio
 const education = portfolio.education
 const introWords = hero.description.split(' ')
 const contactWords = contact.description.split(' ')

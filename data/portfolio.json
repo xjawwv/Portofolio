@@ -21,7 +21,7 @@
     { "title": "Belajar Dasar Pemrograman Web", "meta": "Dicoding / 2026", "type": "pdf", "image": "https://cdn.yuroflac.my.id/portofolio/education-certification/sertifikat_course_123_5529311_010926141130.pdf" },
     { "title": "Rekayasa Perangkat Lunak", "meta": "SMK Negeri 1 Kragilan / Present", "image": "https://cdn.yuroflac.my.id/portofolio/bachelor-design-certificate.png" }
   ],
-  "process": [
+  "processSteps": [
     ["01", "DISCOVER", "Understanding goals, users, and the problem in depth."],
     ["02", "DEFINE", "Research, analyze, and turn insights into clear direction."],
     ["03", "DESIGN", "Designing intuitive interfaces with clarity and purpose."],
