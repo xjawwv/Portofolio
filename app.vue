@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue'
 
-let removeRevealListener: (() => void) | undefined
+let revealObserver: IntersectionObserver | undefined
 
 const scrollToAnchor = (event: Event) => {
   const link = event.currentTarget as HTMLAnchorElement
@@ -35,27 +35,17 @@ const scrollToAnchor = (event: Event) => {
 onMounted(() => {
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => link.addEventListener('click', scrollToAnchor))
 
-  const revealItems = [...document.querySelectorAll<HTMLElement>('.reveal')]
-  let frame = 0
-  const revealOnScroll = () => {
-    cancelAnimationFrame(frame)
-    frame = requestAnimationFrame(() => {
-      const triggerLine = window.innerHeight * 0.86
-      revealItems.forEach((item) => {
-        if (item.classList.contains('is-visible')) return
-        if (item.getBoundingClientRect().top <= triggerLine) item.classList.add('is-visible')
-      })
-    })
-  }
+  const revealItems = document.querySelectorAll<HTMLElement>('.reveal:not(.intro-reveal), .text-reveal:not(.intro-reveal)')
+  revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return
 
-  window.addEventListener('scroll', revealOnScroll, { passive: true })
-  window.addEventListener('resize', revealOnScroll, { passive: true })
-  revealOnScroll()
-  removeRevealListener = () => {
-    cancelAnimationFrame(frame)
-    window.removeEventListener('scroll', revealOnScroll)
-    window.removeEventListener('resize', revealOnScroll)
-  }
+      entry.target.classList.add('is-visible')
+      observer.unobserve(entry.target)
+    })
+  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' })
+
+  revealItems.forEach((item) => revealObserver?.observe(item))
   requestAnimationFrame(() => {
     requestAnimationFrame(() => document.documentElement.classList.add('page-ready'))
   })
@@ -64,7 +54,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => link.removeEventListener('click', scrollToAnchor))
-  removeRevealListener?.()
+  revealObserver?.disconnect()
+  revealObserver = undefined
 })
 
 const projects = [
